@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Onboarding 360° | HR Innovation Prototype</title>
+<style>
+:root{--blue:#1457d9;--blue2:#eaf1ff;--ink:#172033;--muted:#69758b;--line:#e5eaf2;--bg:#f5f7fb;--green:#16845b;--amber:#b76b00;--red:#c03945}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,"Kanit","Noto Sans Thai",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:650}
+.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{background:#101c36;color:#fff;padding:24px 16px;display:flex;flex-direction:column;gap:22px}.brand{display:flex;align-items:center;gap:11px;padding:4px 8px}.brandmark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#5ba0ff,#1457d9);display:grid;place-items:center;font-weight:900;font-size:19px}.brand strong{display:block;font-size:15px}.brand small{color:#aebbd3;font-size:11px}.navlabel{color:#8090ae;font-size:11px;letter-spacing:1.2px;padding:0 10px}.nav{display:grid;gap:6px}.nav button{background:transparent;color:#c8d3e7;text-align:left;display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px}.nav button.active,.nav button:hover{background:#20365f;color:white}.nav .ico{width:22px;text-align:center}.side-note{margin-top:auto;border:1px solid #2d4166;background:#192949;border-radius:14px;padding:14px;font-size:12px;color:#c6d1e4;line-height:1.6}
+main{min-width:0;padding:28px clamp(16px,3vw,38px) 40px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:26px}.eyebrow{font-size:12px;color:var(--blue);font-weight:800;letter-spacing:.8px;text-transform:uppercase}.topbar h1{font-size:clamp(24px,3vw,32px);margin:5px 0 4px;letter-spacing:-.8px}.sub{color:var(--muted);font-size:13px}.profile{display:flex;align-items:center;gap:10px;white-space:nowrap}.avatar{width:40px;height:40px;border-radius:50%;background:#dbe7ff;color:#1748a4;display:grid;place-items:center;font-weight:800}.profile small{display:block;color:var(--muted);font-size:11px}.primary{background:var(--blue);color:white}.secondary{background:white;border:1px solid var(--line);color:var(--ink)}.danger{background:#fff0f0;color:var(--red)}.page{display:none}.page.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0 14px}.section-head h2{margin:0;font-size:18px}.section-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 4px 14px #1b376508;min-width:0}.metric-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.metric-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:var(--blue2);font-size:17px}.metric-value{font-size:29px;font-weight:800;margin:12px 0 5px;letter-spacing:-.8px}.metric-foot{font-size:11px;color:var(--muted)}.positive{color:var(--green)}.layout-two{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-top:16px}.card h3{font-size:15px;margin:0 0 4px}.card .hint{font-size:12px;color:var(--muted);margin-bottom:18px}.progress-row{margin:16px 0}.progress-label{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin-bottom:7px}.track{height:8px;background:#edf1f7;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#2e72f3,#6da2ff);border-radius:20px}.task-summary{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.task-summary:last-child{border-bottom:0}.dot{width:9px;height:9px;border-radius:50%;background:var(--amber);flex:none}.task-summary strong{font-size:12px;display:block}.task-summary small{font-size:11px;color:var(--muted)}.task-summary .due{margin-left:auto;text-align:right;font-size:11px;color:var(--muted)}.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.toolbar input,.toolbar select,.field input,.field select{border:1px solid #dce3ed;border-radius:10px;background:white;padding:10px 12px;color:var(--ink);min-width:0}.toolbar input{flex:1;min-width:180px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:white}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:14px 15px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:middle}th{font-size:11px;color:var(--muted);background:#fafbfe;font-weight:750}tr:last-child td{border-bottom:0}.person{display:flex;align-items:center;gap:10px}.mini-avatar{width:34px;height:34px;border-radius:11px;background:#e9efff;color:#2457bb;display:grid;place-items:center;font-weight:800}.person strong{display:block;font-size:12px}.person small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.pill{display:inline-flex;align-items:center;padding:5px 9px;border-radius:99px;font-size:10px;font-weight:800;white-space:nowrap}.pill.done{background:#e6f7ef;color:#16784e}.pill.progress{background:#eaf1ff;color:#235bc4}.pill.pending{background:#fff4df;color:#9b5c00}.pill.late{background:#ffe9eb;color:#b72e3b}.row-actions{display:flex;gap:5px}.small-btn{padding:7px 9px;font-size:11px;border-radius:8px}.employee-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.employee-card{background:white;border:1px solid var(--line);border-radius:15px;padding:18px}.employee-card .person{margin-bottom:18px}.employee-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px}.employee-card .track{height:9px}.employee-card .card-actions{display:flex;gap:8px;margin-top:16px}.employee-card .card-actions button{flex:1}.empty{padding:32px;text-align:center;color:var(--muted)}.kpi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.kpi-item{padding:16px;border:1px solid var(--line);border-radius:12px}.kpi-item strong{display:block;font-size:20px;margin:7px 0}.kpi-item small{color:var(--muted);font-size:11px}.modal-backdrop{position:fixed;inset:0;background:#0c173b80;display:none;align-items:center;justify-content:center;padding:16px;z-index:10}.modal-backdrop.show{display:flex}.modal{width:min(560px,100%);max-height:90vh;overflow:auto;background:white;border-radius:18px;padding:24px;box-shadow:0 24px 80px #0003}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h2{font-size:19px;margin:0}.close{background:#f1f4f9;padding:7px 11px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:grid;gap:6px}.field label{font-size:12px;font-weight:700}.field input,.field select{width:100%}.field.full{grid-column:1/-1}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}.checklist{display:grid;gap:9px}.check-row{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px}.check-row input{width:17px;height:17px;accent-color:var(--blue)}.check-row span{flex:1;font-size:12px}.check-row small{color:var(--muted);font-size:11px}.toast{position:fixed;right:22px;bottom:22px;background:#152344;color:white;padding:13px 17px;border-radius:12px;box-shadow:0 8px 30px #0002;display:none;z-index:20;font-size:13px}.toast.show{display:block}.footer-note{font-size:11px;color:var(--muted);margin-top:18px;line-height:1.6}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.employee-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.layout-two{grid-template-columns:1fr}}
+@media(max-width:680px){.app{grid-template-columns:1fr}.sidebar{padding:12px;gap:12px}.brand{padding:4px}.navlabel,.side-note{display:none}.nav{grid-template-columns:repeat(4,minmax(0,1fr))}.nav button{justify-content:center;padding:10px 4px;font-size:11px;flex-direction:column;gap:4px}.nav .ico{font-size:17px}.topbar{align-items:flex-start}.profile .profile-text{display:none}main{padding:18px 12px 30px}.grid{gap:9px}.card{padding:13px}.metric-value{font-size:24px}.employee-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.topbar h1{font-size:24px}.topbar .primary{padding:9px;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brandmark">S</div><div><strong>Smart Onboarding</strong><small>HR INNOVATION 360°</small></div></div>
+  <div class="navlabel">WORKSPACE</div>
+  <nav class="nav">
+    <button class="active" data-page="dashboard"><span class="ico">▦</span> Dashboard</button>
+    <button data-page="checklist"><span class="ico">☑</span> Checklist</button>
+    <button data-page="employees"><span class="ico">♙</span> พนักงานใหม่</button>
+    <button data-page="kpi"><span class="ico">↗</span> KPI & Impact</button>
+  </nav>
+  <div class="side-note"><strong>Prototype Mode</strong><br>ระบบสาธิตสำหรับงาน Final Examination<br><br>ข้อมูลทั้งหมดเป็นข้อมูลสมมติและบันทึกในเบราว์เซอร์เครื่องนี้</div>
+</aside>
+<main>
+  <header class="topbar">
+    <div><div class="eyebrow">People Experience · HR Operations</div><h1 id="pageTitle">Onboarding Dashboard</h1><div class="sub" id="pageSubtitle">ติดตามความพร้อมของพนักงานใหม่ในมุมมองเดียว</div></div>
+    <div class="profile"><button class="primary" id="addEmployeeTop">＋ เพิ่มพนักงาน</button><div class="avatar">HR</div><div class="profile-text"><strong style="font-size:13px">HR Administrator</strong><small>Human Resources</small></div></div>
+  </header>
+
+  <section class="page active" id="page-dashboard">
+    <div class="grid" id="metricGrid"></div>
+    <div class="layout-two">
+      <div class="card"><h3>Onboarding Completion</h3><div class="hint">ความคืบหน้าของพนักงานใหม่แต่ละคน</div><div id="completionChart"></div></div>
+      <div class="card"><h3>ต้องติดตามเป็นพิเศษ</h3><div class="hint">รายการงานที่ยังไม่เสร็จหรือใกล้ครบกำหนด</div><div id="attentionList"></div></div>
+    </div>
+    <div class="section-head"><div><h2>พนักงานใหม่ล่าสุด</h2><p>ดูสถานะโดยรวมและเข้าถึงรายการงานได้ทันที</p></div><button class="secondary" data-goto="employees">ดูพนักงานทั้งหมด →</button></div>
+    <div class="table-wrap"><table><thead><tr><th>พนักงาน</th><th>ตำแหน่ง / แผนก</th><th>วันเริ่มงาน</th><th>ความคืบหน้า</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody id="dashboardEmployees"></tbody></table></div>
+  </section>
+
+  <section class="page" id="page-checklist">
+    <div class="section-head"><div><h2>Onboarding Checklist</h2><p>ติดตามงานและอัปเดตสถานะตามผู้รับผิดชอบ</p></div><button class="primary" id="addTaskBtn">＋ เพิ่มรายการงาน</button></div>
+    <div class="toolbar" style="margin-bottom:14px"><input id="taskSearch" placeholder="ค้นหางาน / พนักงาน / ผู้รับผิดชอบ"><select id="taskStatusFilter"><option value="all">ทุกสถานะ</option><option value="pending">รอดำเนินการ</option><option value="progress">กำลังดำเนินการ</option><option value="done">เสร็จแล้ว</option><option value="late">เกินกำหนด</option></select><select id="taskEmployeeFilter"><option value="all">พนักงานทุกคน</option></select></div>
+    <div class="table-wrap"><table><thead><tr><th>รายการงาน</th><th>พนักงาน</th><th>ผู้รับผิดชอบ</th><th>กำหนดเสร็จ</th><th>สถานะ</th><th>อัปเดต</th></tr></thead><tbody id="taskTable"></tbody></table></div>
+    <div class="footer-note">หมายเหตุ: สถานะ “เกินกำหนด” คำนวณจากวันที่กำหนดและสถานะงานในระบบตัวอย่าง</div>
+  </section>
+
+  <section class="page" id="page-employees">
+    <div class="section-head"><div><h2>Employee Directory</h2><p>ข้อมูลพนักงานใหม่และความคืบหน้ารายบุคคล</p></div><button class="primary" id="addEmployeeBtn">＋ เพิ่มพนักงานใหม่</button></div>
+    <div class="toolbar" style="margin-bottom:14px"><input id="employeeSearch" placeholder="ค้นหาชื่อ ตำแหน่ง หรือแผนก"></div>
+    <div class="employee-grid" id="employeeCards"></div>
+  </section>
+
+  <section class="page" id="page-kpi">
+    <div class="section-head"><div><h2>KPI & Business Impact</h2><p>ตัวชี้วัดที่ใช้ประเมินประสิทธิภาพของ Workflow ใหม่</p></div><button class="secondary" id="exportBtn">↓ Export CSV</button></div>
+    <div class="grid" id="kpiMetrics"></div>
+    <div class="card" style="margin-top:16px"><h3>เป้าหมายการปรับปรุงกระบวนการ</h3><div class="hint">ตัวอย่าง KPI สำหรับทดสอบแนวคิด ยังไม่ใช่ผลลัพธ์จากการใช้งานจริง</div><div class="kpi-grid">
+      <div class="kpi-item"><span class="pill progress">Efficiency</span><strong>ลดเวลา 30%</strong><small>เปรียบเทียบเวลาติดตามงานก่อนและหลังใช้ระบบ</small></div>
+      <div class="kpi-item"><span class="pill done">On-time</span><strong>≥ 95%</strong><small>สัดส่วนงานที่เสร็จภายในกำหนดเวลา</small></div>
+      <div class="kpi-item"><span class="pill progress">Completeness</span><strong>≥ 98%</strong><small>สัดส่วน Checklist ที่ดำเนินการครบถ้วน</small></div>
+      <div class="kpi-item"><span class="pill pending">Risk Control</span><strong>ลดงานตกหล่น 50%</strong><small>เปรียบเทียบจำนวนงานตกหล่นในช่วงเวลาเท่ากัน</small></div>
+    </div></div>
+    <div class="card" style="margin-top:16px"><h3>วิธีเก็บข้อมูลเพื่อพิสูจน์ผลลัพธ์</h3><div class="hint">แนะนำให้เก็บข้อมูล Baseline ก่อนใช้งาน และเปรียบเทียบหลังทดลองใช้</div>
+      <ol style="font-size:13px;line-height:2;padding-left:20px"><li>จับเวลาที่ HR ใช้ติดตามงานต่อพนักงาน 1 คน</li><li>บันทึกจำนวนงานที่เสร็จทันกำหนดและงานที่เกินกำหนด</li><li>ตรวจความครบถ้วนของเอกสารและ Checklist</li><li>เปรียบเทียบก่อน–หลังด้วยช่วงเวลาหรือจำนวนพนักงานที่ใกล้เคียงกัน</li></ol>
+    </div>
+  </section>
+  <div class="footer-note">Smart Onboarding 360° · Academic Prototype · ใช้ข้อมูลสมมติเท่านั้น ไม่ใช่ระบบ HR จริง</div>
+</main>
+</div>
+
+<div class="modal-backdrop" id="employeeModal"><div class="modal"><div class="modal-head"><h2>เพิ่มพนักงานใหม่</h2><button class="close" data-close="employeeModal">✕</button></div>
+<form id="employeeForm"><div class="form-grid">
+<div class="field"><label>ชื่อ–นามสกุล</label><input name="name" required placeholder="เช่น กานต์ชนก ใจดี"></div>
+<div class="field"><label>รหัสพนักงาน</label><input name="id" required placeholder="เช่น EMP-104"></div>
+<div class="field"><label>ตำแหน่ง</label><input name="role" required placeholder="เช่น HR Officer"></div>
+<div class="field"><label>แผนก</label><input name="dept" required placeholder="เช่น Human Resources"></div>
+<div class="field full"><label>วันเริ่มงาน</label><input name="start" type="date" required></div>
+</div><div class="modal-actions"><button type="button" class="secondary" data-close="employeeModal">ยกเลิก</button><button class="primary" type="submit">บันทึกพนักงาน</button></div></form></div></div>
+
+<div class="modal-backdrop" id="taskModal"><div class="modal"><div class="modal-head"><h2>เพิ่มรายการ Onboarding</h2><button class="close" data-close="taskModal">✕</button></div>
+<form id="taskForm"><div class="form-grid">
+<div class="field full"><label>ชื่อรายการงาน</label><input name="title" required placeholder="เช่น อบรมความปลอดภัย"></div>
+<div class="field"><label>พนักงาน</label><select name="employee" id="newTaskEmployee" required></select></div>
+<div class="field"><label>ผู้รับผิดชอบ</label><input name="owner" required placeholder="เช่น HR / IT / หัวหน้างาน"></div>
+<div class="field full"><label>กำหนดเสร็จ</label><input name="due" type="date" required></div>
+</div><div class="modal-actions"><button type="button" class="secondary" data-close="taskModal">ยกเลิก</button><button class="primary" type="submit">เพิ่มรายการงาน</button></div></form></div></div>
+
+<div class="modal-backdrop" id="detailModal"><div class="modal"><div class="modal-head"><h2 id="detailTitle">รายละเอียดพนักงาน</h2><button class="close" data-close="detailModal">✕</button></div><div id="detailContent"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY='smartOnboarding360Prototype_v1';
+const today=new Date();today.setHours(0,0,0,0);
+const isoOffset=(n)=>{const d=new Date(today);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const seed={
+ employees:[
+  {id:'EMP-101',name:'กานต์ชนก ใจดี',role:'HR Officer',dept:'Human Resources',start:isoOffset(-3)},
+  {id:'EMP-102',name:'ธนกฤต วัฒนชัย',role:'Production Engineer',dept:'Production',start:isoOffset(-1)},
+  {id:'EMP-103',name:'ณัฐธิดา พูนผล',role:'IT Support',dept:'Information Technology',start:isoOffset(1)}
+ ],
+ tasks:[
+  {id:1,title:'ตรวจสอบเอกสารพนักงาน',employee:'EMP-101',owner:'HR',due:isoOffset(-3),status:'done'},
+  {id:2,title:'เตรียมอุปกรณ์และบัญชีผู้ใช้งาน',employee:'EMP-101',owner:'IT',due:isoOffset(-2),status:'done'},
+  {id:3,title:'ปฐมนิเทศองค์กร',employee:'EMP-101',owner:'HR',due:isoOffset(-1),status:'progress'},
+  {id:4,title:'อบรมความปลอดภัย',employee:'EMP-101',owner:'Safety',due:isoOffset(1),status:'pending'},
+  {id:5,title:'นัดหมายหัวหน้างาน',employee:'EMP-101',owner:'Supervisor',due:isoOffset(2),status:'pending'},
+  {id:6,title:'ตรวจสอบเอกสารพนักงาน',employee:'EMP-102',owner:'HR',due:isoOffset(-1),status:'done'},
+  {id:7,title:'เตรียมอุปกรณ์และบัญชีผู้ใช้งาน',employee:'EMP-102',owner:'IT',due:isoOffset(0),status:'progress'},
+  {id:8,title:'ปฐมนิเทศองค์กร',employee:'EMP-102',owner:'HR',due:isoOffset(1),status:'pending'},
+  {id:9,title:'อบรมความปลอดภัย',employee:'EMP-102',owner:'Safety',due:isoOffset(2),status:'pending'},
+  {id:10,title:'นัดหมายหัวหน้างาน',employee:'EMP-102',owner:'Supervisor',due:isoOffset(3),status:'pending'},
+  {id:11,title:'ตรวจสอบเอกสารพนักงาน',employee:'EMP-103',owner:'HR',due:isoOffset(1),status:'pending'},
+  {id:12,title:'เตรียมอุปกรณ์และบัญชีผู้ใช้งาน',employee:'EMP-103',owner:'IT',due:isoOffset(1),status:'pending'},
+  {id:13,title:'ปฐมนิเทศองค์กร',employee:'EMP-103',owner:'HR',due:isoOffset(2),status:'pending'},
+  {id:14,title:'อบรมความปลอดภัย',employee:'EMP-103',owner:'Safety',due:isoOffset(3),status:'pending'},
+  {id:15,title:'นัดหมายหัวหน้างาน',employee:'EMP-103',owner:'Supervisor',due:isoOffset(4),status:'pending'}
+ ]
+};
+let state;
+try{state=JSON.parse(localStorage.getItem(STORAGE_KEY))||structuredClone(seed)}catch(e){state=structuredClone(seed)}
+let nextTaskId=Math.max(0,...state.tasks.map(t=>t.id))+1;
+const statusNames={done:'เสร็จแล้ว',progress:'กำลังดำเนินการ',pending:'รอดำเนินการ',late:'เกินกำหนด'};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtDate=s=>s?new Date(s+'T00:00:00').toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'}):'—';
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));renderAll()}
+function emp(id){return state.employees.find(e=>e.id===id)}
+function actualStatus(t){return t.status!=='done'&&t.due<isoOffset(0)?'late':t.status}
+function tasksFor(id){return state.tasks.filter(t=>t.employee===id)}
+function progress(id){const a=tasksFor(id);return a.length?Math.round(a.filter(t=>t.status==='done').length/a.length*100):0}
+function overall(){return state.tasks.length?Math.round(state.tasks.filter(t=>t.status==='done').length/state.tasks.length*100):0}
+function pill(status){return `<span class="pill ${status}">${statusNames[status]}</span>`}
+function initials(name){return String(name).split(' ').slice(0,2).map(s=>s[0]||'').join('')}
+function employeeStatus(id){const p=progress(id);if(p===100)return 'done';if(tasksFor(id).some(t=>actualStatus(t)==='late'))return 'late';return p?'progress':'pending'}
+function metric(label,value,icon,foot){return `<div class="card"><div class="metric-top"><span>${label}</span><span class="metric-icon">${icon}</span></div><div class="metric-value">${value}</div><div class="metric-foot">${foot}</div></div>`}
+function renderDashboard(){
+ const pending=state.tasks.filter(t=>actualStatus(t)==='pending').length;
+ const late=state.tasks.filter(t=>actualStatus(t)==='late').length;
+ $('metricGrid').innerHTML=metric('พนักงานใหม่',state.employees.length,'♙','รายชื่อในระบบตัวอย่าง')+metric('Checklist ทั้งหมด',state.tasks.length,'☑','รายการงานที่ต้องติดตาม')+metric('เสร็จแล้ว',state.tasks.filter(t=>t.status==='done').length,'✓',`ความสำเร็จรวม ${overall()}%`)+metric('งานเกินกำหนด',late,'⚑',late?'ควรติดตามโดยเร็ว':'ไม่มีงานเกินกำหนด');
+ $('completionChart').innerHTML=state.employees.map(e=>`<div class="progress-row"><div class="progress-label"><span>${esc(e.name)}</span><strong>${progress(e.id)}%</strong></div><div class="track"><div class="fill" style="width:${progress(e.id)}%"></div></div></div>`).join('')||'<div class="empty">ยังไม่มีข้อมูลพนักงาน</div>';
+ const attention=state.tasks.filter(t=>t.status!=='done').sort((a,b)=>a.due.localeCompare(b.due)).slice(0,5);
+ $('attentionList').innerHTML=attention.map(t=>`<div class="task-summary"><span class="dot" style="background:${actualStatus(t)==='late'?'var(--red)':actualStatus(t)==='progress'?'var(--blue)':'var(--amber)'}"></span><div><strong>${esc(t.title)}</strong><small>${esc(emp(t.employee)?.name||'ไม่พบข้อมูลพนักงาน')} · ${esc(t.owner)}</small></div><div class="due">${fmtDate(t.due)}<br>${pill(actualStatus(t))}</div></div>`).join('')||'<div class="empty">ไม่มีงานค้าง 🎉</div>';
+ $('dashboardEmployees').innerHTML=state.employees.slice(0,5).map(e=>`<tr><td><div class="person"><div class="mini-avatar">${esc(initials(e.name))}</div><div><strong>${esc(e.name)}</strong><small>${esc(e.id)}</small></div></div></td><td>${esc(e.role)}<br><small style="color:var(--muted)">${esc(e.dept)}</small></td><td>${fmtDate(e.start)}</td><td style="min-width:130px"><div class="progress-label"><span>${progress(e.id)}%</span></div><div class="track"><div class="fill" style="width:${progress(e.id)}%"></div></div></td><td>${pill(employeeStatus(e.id))}</td><td><button class="secondary small-btn" onclick="showDetails('${e.id}')">ดูรายละเอียด</button></td></tr>`).join('')||'<tr><td colspan="6" class="empty">ยังไม่มีข้อมูล</td></tr>';
+}
+function renderTasks(){
+ const q=$('taskSearch').value.toLowerCase(), sf=$('taskStatusFilter').value, ef=$('taskEmployeeFilter').value;
+ const list=state.tasks.filter(t=>{const e=emp(t.employee)||{};const match=[t.title,t.owner,e.name,e.id].join(' ').toLowerCase().includes(q);return match&&(sf==='all'||actualStatus(t)===sf)&&(ef==='all'||t.employee===ef)});
+ $('taskTable').innerHTML=list.map(t=>`<tr><td><strong>${esc(t.title)}</strong><br><small style="color:var(--muted)">Task #${t.id}</small></td><td>${esc(emp(t.employee)?.name||'ไม่พบข้อมูล')}</td><td>${esc(t.owner)}</td><td>${fmtDate(t.due)}</td><td>${pill(actualStatus(t))}</td><td><select aria-label="เปลี่ยนสถานะ" onchange="updateTask(${t.id},this.value)" style="border:1px solid var(--line);border-radius:8px;padding:7px;font-size:11px"><option value="pending" ${t.status==='pending'?'selected':''}>รอดำเนินการ</option><option value="progress" ${t.status==='progress'?'selected':''}>กำลังดำเนินการ</option><option value="done" ${t.status==='done'?'selected':''}>เสร็จแล้ว</option></select> <button class="danger small-btn" onclick="deleteTask(${t.id})" title="ลบรายการ">ลบ</button></td></tr>`).join('')||'<tr><td colspan="6" class="empty">ไม่พบรายการงานที่ตรงกับเงื่อนไข</td></tr>';
+}
+function renderEmployees(){
+ const q=$('employeeSearch').value.toLowerCase();
+ const list=state.employees.filter(e=>[e.name,e.id,e.role,e.dept].join(' ').toLowerCase().includes(q));
+ $('employeeCards').innerHTML=list.map(e=>`<div class="employee-card"><div class="person"><div class="mini-avatar" style="width:44px;height:44px">${esc(initials(e.name))}</div><div><strong>${esc(e.name)}</strong><small>${esc(e.id)}</small></div></div><div style="font-size:12px;line-height:1.8">${esc(e.role)}<br><span style="color:var(--muted)">${esc(e.dept)}</span><br><span style="color:var(--muted)">เริ่มงาน ${fmtDate(e.start)}</span></div><div style="margin-top:17px"><div class="employee-meta"><span>Onboarding Progress</span><strong>${progress(e.id)}%</strong></div><div class="track"><div class="fill" style="width:${progress(e.id)}%"></div></div></div><div class="card-actions"><button class="secondary" onclick="showDetails('${e.id}')">ดู Checklist</button><button class="danger" onclick="deleteEmployee('${e.id}')">ลบ</button></div></div>`).join('')||'<div class="empty">ไม่พบข้อมูลพนักงาน</div>';
+}
+function renderKPI(){
+ const done=state.tasks.filter(t=>t.status==='done').length, late=state.tasks.filter(t=>actualStatus(t)==='late').length, ontime=state.tasks.filter(t=>t.status==='done'&&t.due>=t.due).length;
+ $('kpiMetrics').innerHTML=metric('Checklist Completion',overall()+'%','✓','งานที่เสร็จแล้ว ÷ งานทั้งหมด')+metric('งานเกินกำหนด',late,'⚑','จำนวนงานที่ยังไม่เสร็จและเลยกำหนด')+metric('พนักงานครบ Checklist',state.employees.filter(e=>progress(e.id)===100).length,'♙','พนักงานที่ทำรายการครบทุกข้อ')+metric('งานกำลังดำเนินการ',state.tasks.filter(t=>t.status==='progress').length,'↻','รายการที่อยู่ระหว่างดำเนินการ');
+}
+function renderFilters(){
+ const current=$('taskEmployeeFilter').value;
+ $('taskEmployeeFilter').innerHTML='<option value="all">พนักงานทุกคน</option>'+state.employees.map(e=>`<option value="${esc(e.id)}">${esc(e.name)}</option>`).join('');
+ if([...$('taskEmployeeFilter').options].some(o=>o.value===current))$('taskEmployeeFilter').value=current;
+ $('newTaskEmployee').innerHTML=state.employees.map(e=>`<option value="${esc(e.id)}">${esc(e.name)} (${esc(e.id)})</option>`).join('');
+}
+function renderAll(){renderFilters();renderDashboard();renderTasks();renderEmployees();renderKPI()}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2600)}
+function navigate(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));const titles={dashboard:['Onboarding Dashboard','ติดตามความพร้อมของพนักงานใหม่ในมุมมองเดียว'],checklist:['Onboarding Checklist','ติดตามงานและอัปเดตสถานะตามผู้รับผิดชอบ'],employees:['Employee Directory','ข้อมูลพนักงานใหม่และความคืบหน้ารายบุคคล'],kpi:['KPI & Business Impact','ตัวชี้วัดสำหรับประเมินประสิทธิภาพของ Workflow ใหม่']};$('pageTitle').textContent=titles[page][0];$('pageSubtitle').textContent=titles[page][1]}
+function openModal(id){$(id).classList.add('show')}
+function closeModal(id){$(id).classList.remove('show')}
+function showDetails(id){const e=emp(id);if(!e)return;const ts=tasksFor(id);$('detailTitle').textContent=e.name+' · Onboarding';$('detailContent').innerHTML=`<div class="employee-meta"><span>${esc(e.role)} · ${esc(e.dept)}</span><strong>${progress(id)}% complete</strong></div><div class="track" style="margin-bottom:18px"><div class="fill" style="width:${progress(id)}%"></div></div><div class="checklist">${ts.map(t=>`<label class="check-row"><input type="checkbox" ${t.status==='done'?'checked':''} onchange="updateTask(${t.id},this.checked?'done':'pending')"><span>${esc(t.title)}<br><small>ผู้รับผิดชอบ: ${esc(t.owner)} · กำหนด ${fmtDate(t.due)}</small></span>${pill(actualStatus(t))}</label>`).join('')||'<div class="empty">ยังไม่มี Checklist</div>'}</div><div class="modal-actions"><button class="secondary" data-close="detailModal" onclick="closeModal('detailModal')">ปิด</button></div>`;openModal('detailModal')}
+function updateTask(id,status){const t=state.tasks.find(t=>t.id===id);if(!t)return;t.status=status;save();toast('อัปเดตสถานะรายการงานแล้ว')}
+function deleteTask(id){if(!confirm('ยืนยันลบรายการงานนี้?'))return;state.tasks=state.tasks.filter(t=>t.id!==id);save();toast('ลบรายการงานแล้ว')}
+function deleteEmployee(id){if(!confirm('ยืนยันลบพนักงานและ Checklist ที่เกี่ยวข้อง?'))return;state.employees=state.employees.filter(e=>e.id!==id);state.tasks=state.tasks.filter(t=>t.employee!==id);save();toast('ลบข้อมูลพนักงานแล้ว')}
+function exportCSV(){const rows=[['Task ID','Task','Employee ID','Employee Name','Owner','Due Date','Status'],...state.tasks.map(t=>[t.id,t.title,t.employee,emp(t.employee)?.name||'',t.owner,t.due,statusNames[actualStatus(t)]])];const csv='\uFEFF'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='smart-onboarding-checklist.csv';a.click();URL.revokeObjectURL(a.href);toast('ส่งออกไฟล์ CSV แล้ว')}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.goto)));
+$('addEmployeeTop').onclick=$('addEmployeeBtn').onclick=()=>openModal('employeeModal');
+$('addTaskBtn').onclick=()=>{if(!state.employees.length){toast('กรุณาเพิ่มพนักงานก่อน');return}openModal('taskModal')};
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
+document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+$('employeeForm').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target),id=String(f.get('id')).trim();if(state.employees.some(x=>x.id===id)){toast('รหัสพนักงานนี้มีอยู่แล้ว');return}state.employees.push({id,name:String(f.get('name')).trim(),role:String(f.get('role')).trim(),dept:String(f.get('dept')).trim(),start:f.get('start')});const templates=[['ตรวจสอบเอกสารพนักงาน','HR',0],['เตรียมอุปกรณ์และบัญชีผู้ใช้งาน','IT',0],['ปฐมนิเทศองค์กร','HR',1],['อบรมความปลอดภัย','Safety',2],['นัดหมายหัวหน้างาน','Supervisor',3]];templates.forEach(([title,owner,offset])=>state.tasks.push({id:nextTaskId++,title,employee:id,owner,due:isoOffset(offset),status:'pending'}));save();e.target.reset();closeModal('employeeModal');toast('เพิ่มพนักงานและสร้าง Checklist เริ่มต้นแล้ว')});
+$('taskForm').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);state.tasks.push({id:nextTaskId++,title:String(f.get('title')).trim(),employee:f.get('employee'),owner:String(f.get('owner')).trim(),due:f.get('due'),status:'pending'});save();e.target.reset();closeModal('taskModal');toast('เพิ่มรายการงานแล้ว')});
+['taskSearch','taskStatusFilter','taskEmployeeFilter'].forEach(id=>$(id).addEventListener('input',renderTasks));
+$('employeeSearch').addEventListener('input',renderEmployees);$('exportBtn').onclick=exportCSV;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-backdrop.show').forEach(m=>m.classList.remove('show'))});
+renderAll();
+</script>
+</body>
+</html>
